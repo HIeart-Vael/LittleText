@@ -1,0 +1,119 @@
+{#通过页面顶端的{% load static %}加载后，才可以使用static方法#}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf+8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    {#设置了一个动态的页面title块#}
+    <title>{% block title %}base{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {#设置了一个动态的css加载块#}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.8.6/antd.min.css" integrity="sha512-RXHMxbGRfnzYRE2sQia0Rg7A6+3V1pGGgb6ZyGLYYppeVvjYECjB1rhtWNwfGJXGR2TPVnQYeOJa0Og50zpDtw==" crossorigin="anonymous" />
+
+    {% block css %}
+    {% endblock %}
+
+</head>
+<style>
+    body {
+        background: url("{% static 'imgs/1.jpg' %}") no-repeat;
+        background-size:cover;
+    }
+</style>
+<body >
+<nav class="navbar navbar-default">
+    <div class="container-fluid" style="background: #76a6e0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav"
+                    aria-expanded="false">
+                <span class="sr-only">切换导航条</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">我是大帅比</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="my-nav">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/index/">主页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.is_login %}
+                    <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                    <li><a href="/logout/">登出</a></li>
+                {% else %}
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register/">注册</a></li>
+                {% endif %}
+            </ul>
+
+            {% if request.session.is_login %}
+                <ul class="nav navbar-nav navbar-right"
+                    style="height:50px; display: flex;justify-content: center;align-items: center">
+                    <form class="form-inline my-2 my-lg-0" method="POST" action="search">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" name="key" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </ul>
+            {% endif %}
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+{#为具体页面的主体内容留下接口#}
+{% block content %}
+{% endblock %}
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'JS/jquery-3.5.1.min.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+{#将样式文件指向了我们的实际静态文件#}
+<script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+</body>
+</html>
+{##}
+{##}
+{#    <div id="RT1"></div>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>#}
+{#    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>#}
+{#    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.8.6/antd.min.js" integrity="sha512-R7eTyrvng3j7A78zgzUaK7TgKSLmOxubfPXcHrAtI8WRS7i8jFH5id9iETxjma0HfrH7EaPbkAnHjOJ5w7+I9A==" crossorigin="anonymous"></script>#}
+{#    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>#}
+{#    <script src="{% static 'js/index.js' %}"></script>#}
+{#    <script type="text/babel">#}
+        {#import { DatePicker } from 'antd';#}
+{##}
+{#function onChange(date, dateString) {#}
+{#  console.log(date, dateString);#}
+{#}#}
+{#        function App(){#}
+{#            return (#}
+{#                <div>#}
+{#                    <antd.DatePicker onChange={onChange} />#}
+                    {#<antd.Button type={'primary'}>点击提交</antd.Button>#}
+{#                </div>#}
+{#            );#}
+{#        }#}
+{##}
+{#        ReactDOM.render(<App/>, document.getElementById("RT1"));#}
+{#    </script>#}

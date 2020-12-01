@@ -1,0 +1,40 @@
+{#mytext/templates/mytext/index.html#}
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}主页{% endblock %}
+
+{% block content %}
+
+    <div style="height:50px; display: flex;justify-content: center;align-items: center">
+        <br/>
+        {% if request.session.is_login %}
+            <h1 id="titlesss">你好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% else %}
+            <h1>你尚未登录，请登陆后访问！</h1>
+        {% endif %}
+    </div>
+    <script>
+        const t = document.getElementById("titlesss");
+        setTimeout(() => {
+            t.style.display = 'none';
+
+        }, 1000)
+    </script>
+    <link rel="stylesheet" href="{% static 'CSS/plus.css' %}">
+    <div class="plus" id="plus">
+        <svg width="80px" height="80px" viewBox="0 0 16 16"
+             class="bi bi-plus-circle-fill" fill="currentColor"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1
+                  0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+        </svg>
+    </div>
+    <script>
+        document.getElementById("plus").addEventListener("click", () => {
+            window.location = "/index/create";
+        })
+    </script>
+{% endblock  %}

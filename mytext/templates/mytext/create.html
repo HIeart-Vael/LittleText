@@ -1,0 +1,32 @@
+{#通过{% extends 'base.html' %}继承了‘base.html’模板的内容#}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}新建{% endblock %}
+{% block css %}
+    <link href="{% static 'css/create.css' %}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <div style="height:500px; display: flex;justify-content: center;align-items: center">
+        <div class="col-md-4 col-md-offset-0">
+            <form class='form-create' action="{% url 'create' %}" method="post">
+                {% csrf_token %}
+                <h2 class="text-center">来创建你的新计划吧！</h2>
+                <div>
+                    {{ record_form.time.label }}
+                    {{ record_form.time }}
+                </div>
+                <div class="form-group">
+                    {{ record_form.place.label }}
+                    {{ record_form.place }}
+                </div>
+                <div class="form-group">
+                    {{ record_form.note.label }}
+                    {{ record_form.note }}
+                </div>
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">提交</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

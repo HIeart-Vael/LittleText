@@ -1,0 +1,29 @@
+.plus {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 2px 2px 5px 2px;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    background-color: white;
+}
+
+.plus:hover {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 5px 5px 5px 2px;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
